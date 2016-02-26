@@ -1,5 +1,7 @@
 package com.example.security;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,11 +20,11 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String userName)
 			throws UsernameNotFoundException {
-		Account account = accountRepository.findByUserName(userName);
-		if(account == null){
+		Optional<Account> account = accountRepository.findByUserName(userName);
+		if( !account.isPresent() ){
 			throw new UsernameNotFoundException(userName);
 		}
-		return new UserDetailsImpl(account);
+		return new UserDetailsImpl(account.get());
 	}
 
 }

@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class AmugonaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AmugonaApplication.class, args);
+		SpringApplication.run(AmugonaApplication.class);
 	}
 	
 	@Bean

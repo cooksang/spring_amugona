@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.accounts.AccountDto.Update;
+import com.example.accounts.exception.AccountNotFoundException;
+import com.example.accounts.exception.UserDuplicatedException;
 
 @Service
 @Transactional
@@ -29,15 +31,15 @@ public class AccountService {
 	public Account createAccount(AccountDto.Create dto) {
 		
 		Account account = modelMapper.map(dto, Account.class);
-		//TODO 유효한 username인지 판단
+
 		String userName = dto.getUserName();
-		if(repository.findByUserName(userName) != null){
+
+		if(repository.findByUserName(userName).isPresent()){
 			log.error("user duplicated exception. {}", userName);
 			throw new UserDuplicatedException(userName);
 		}
 		
-//		Account account = new Account();
-//		BeanUtils.copyProperties(dto, account);
+		account.setPassword(passwordEncoder.encode(account.getPassword()));
 		
 		Date now = new Date();
 		account.setJoined(now);
@@ -50,7 +52,7 @@ public class AccountService {
 
 	public Account updateAccount(Long id, Update updateDto) {
 		Account account = getAccount(id);
-		account.setPassword(updateDto.getPassword());
+		account.setPassword(passwordEncoder.encode(account.getPassword()));
 		account.setFullName(updateDto.getFullName());
 		return repository.save(account);
 	}

@@ -1,4 +1,4 @@
-package com.example.accounts;
+package com.example.accounts.exception;
 
 public class AccountNotFoundException extends RuntimeException {
 

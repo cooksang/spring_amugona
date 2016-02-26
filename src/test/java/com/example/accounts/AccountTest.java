@@ -9,6 +9,7 @@ public class AccountTest {
 	
 	@Test
 	public void getterSetter(){
+		
 		Account account = new Account();
 		account.setUserName("example");
 		account.setPassword("password");

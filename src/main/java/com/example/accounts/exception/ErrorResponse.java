@@ -1,4 +1,4 @@
-package com.example.commons;
+package com.example.accounts.exception;
 
 import java.util.List;
 

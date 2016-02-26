@@ -12,6 +12,7 @@ public class AccountDto {
 	
 	@Data
 	public static class Create{
+		
 		@NotBlank
 		@Size(min = 5)
 		private String userName;
@@ -32,7 +33,13 @@ public class AccountDto {
 	
 	@Data
 	public static class Update {
+		
+		@NotBlank
+		@Size(min = 5)
 		private String fullName;
+		
+		@NotBlank
+		@Size(min = 5)
 		private String password;
 	}
 }

@@ -23,11 +23,9 @@ public class UserDetailsImpl extends User{
 
 	private static Collection<? extends GrantedAuthority> authorities(Account account) {
 		java.util.List<GrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 		if(account.isAdmin()){
 			authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-		}
-		else{
-			authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 		}
 		return authorities;
 	}
